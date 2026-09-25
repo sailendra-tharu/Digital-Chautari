@@ -17,16 +17,39 @@ const sora = Sora({
   weight: ["600", "700", "800"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteTitle = "Digital Chautari | Ideas → Impact";
+const siteDescription = "Digital marketing, content creation, and health-tech software from Kathmandu to the world.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Digital Chautari | Ideas → Impact",
+    default: siteTitle,
     template: "%s | Digital Chautari",
   },
-  description: "Digital marketing, content creation, and health-tech software from Kathmandu to the world.",
+  description: siteDescription,
+  keywords: ["digital marketing", "content creation", "software development", "health-tech", "Nepal"],
+  authors: [{ name: "Digital Chautari" }],
+  creator: "Digital Chautari",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Digital Chautari",
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: siteTitle }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/opengraph-image"],
+  },
+  robots: { index: true, follow: true },
 };
 
-// Hide reveal targets before first paint so they don't flash before animating in.
-// Only runs when JS is available, so content stays visible without it.
 const revealBootstrap = `document.documentElement.classList.add("reveal-ready")`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

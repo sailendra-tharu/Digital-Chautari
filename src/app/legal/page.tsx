@@ -3,7 +3,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Text } from "@/components/ui/Text";
 import { legalSections } from "@/data/legal";
 
-export const metadata: Metadata = { title: "Legal" };
+export const metadata: Metadata = { title: "Legal", description: "Read Digital Chautari policies and learn how we handle information and client relationships." };
 
 export default function LegalPage() {
   return (

@@ -12,7 +12,7 @@ import { industries, plans, serviceCategories } from "@/data/services";
 import { WhyWorkWithUs } from "@/components/services/WhyWorkWithUs";
 import { Button } from "@/components/ui/Button";
 
-export const metadata: Metadata = { title: "Services" };
+export const metadata: Metadata = { title: "Services", description: "Explore Digital Chautari services across digital marketing, content creation, branding, and software development." };
 
 const CONSULTATION_HREF = "/contact#contact-form";
 

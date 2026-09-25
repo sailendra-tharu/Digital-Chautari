@@ -44,9 +44,9 @@ export const serviceTeasers: { icon: LucideIcon; title: string; tagline: string;
 ];
 
 export const ventures: { category: string; title: string; description: string; image: string; href: string }[] = [
-  { category: "Creative marketing agency", title: "Eco Creative Marketing Agency", image: "/assets/services-chautari.jpg", href: "/products?venture=eco#ventures", description: "Purposeful strategy and creative campaigns for brands ready to grow with intention." },
-  { category: "Content creation studio", title: "One Content Creation Studio", image: "/assets/products-hero.jpg", href: "/products?venture=one#ventures", description: "Stories with a pulse, made for brands that want to move people, not just fill a feed." },
-  { category: "Health-tech platform", title: "Physio@Home", image: "/assets/about-team.jpg", href: "/products?venture=physio#ventures", description: "Personalized physiotherapy support that brings trusted clinical care into everyday life." },
+  { category: "Creative marketing agency", title: "Eco Creative Marketing Agency", image: "/assets/eco.webp", href: "/products?venture=eco#ventures", description: "Purposeful strategy and creative campaigns for brands ready to grow with intention." },
+  { category: "Content creation studio", title: "One Content Creation Studio", image: "/assets/studio.webp", href: "/products?venture=one#ventures", description: "Stories with a pulse, made for brands that want to move people, not just fill a feed." },
+  { category: "Health-tech platform", title: "Physio@Home", image: "/assets/home.webp", href: "/products?venture=physio#ventures", description: "Personalized physiotherapy support that brings trusted clinical care into everyday life." },
 ];
 
 export const industries: { icon: LucideIcon; label: string; tone: Tone }[] = [
@@ -72,7 +72,7 @@ export const testimonials: { quote: string; name: string; role: string; image: s
 ];
 
 export const blogPosts: { image: string; category: string; date: string; title: string; excerpt: string }[] = [
-  { image: "/assets/services-chautari.jpg", category: "Perspective", date: "May 18, 2025", title: "Why the best brands feel more like people", excerpt: "A little more humanity can make a lot more room for connection." },
-  { image: "/assets/products-hero.jpg", category: "Creative process", date: "Apr 26, 2025", title: "The quiet power of a clear point of view", excerpt: "Before you make more noise, make sure you know what you want to say." },
-  { image: "/assets/about-team.jpg", category: "Technology", date: "Mar 09, 2025", title: "Building digital products people return to", excerpt: "Useful is a beautiful place to start — and a good place to keep going." },
+  { image: "/assets/brand.webp", category: "Perspective", date: "May 18, 2025", title: "Why the best brands feel more like people", excerpt: "A little more humanity can make a lot more room for connection." },
+  { image: "/assets/digital.webp", category: "Creative process", date: "Apr 26, 2025", title: "The quiet power of a clear point of view", excerpt: "Before you make more noise, make sure you know what you want to say." },
+  { image: "/assets/view.webp", category: "Technology", date: "Mar 09, 2025", title: "Building digital products people return to", excerpt: "Useful is a beautiful place to start — and a good place to keep going." },
 ];

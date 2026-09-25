@@ -10,7 +10,7 @@ import { ResponseTimeCard } from "@/components/contact/ResponseTimeCard";
 import { MediaHero } from "@/components/sections/MediaHero";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = { title: "Contact", description: "Start a conversation with Digital Chautari about your next project, partnership, or idea." };
 
 export default function ContactPage() {
   return (

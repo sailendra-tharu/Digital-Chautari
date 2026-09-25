@@ -7,7 +7,7 @@ import { ProductSwitcherView } from "@/components/products/ProductSwitcherView";
 import { DarkCta } from "@/components/sections/DarkCta";
 import { MediaHero } from "@/components/sections/MediaHero";
 
-export const metadata: Metadata = { title: "Products" };
+export const metadata: Metadata = { title: "Products", description: "Discover Digital Chautari ventures in creative marketing, content, and health-tech." };
 
 export default function ProductsPage() {
   return (

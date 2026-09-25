@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Text } from "@/components/ui/Text";
 import { faqs } from "@/data/faq";
 
-export const metadata: Metadata = { title: "FAQ" };
+export const metadata: Metadata = { title: "FAQ", description: "Find answers to common questions about Digital Chautari services, process, and partnerships." };
 
 export default function FaqPage() {
   return (

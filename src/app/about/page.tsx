@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/Text";
 import { commitments, milestones, purpose, story, values } from "@/data/about";
 import { team } from "@/data/team";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = { title: "About", description: "Meet the people and principles behind Digital Chautari, a creative technology company from Kathmandu." };
 
 export default function AboutPage() {
   return (
