@@ -10,6 +10,10 @@ A Next.js App Router site for Digital Chautari, a creative technology company fr
 - `/about` — Story, values, team, and roadmap
 - `/contact` — Contact details and project form
 
+## Contact API
+
+`POST /api/contact` validates submissions server-side with the same Zod schema the form uses (`src/lib/contact.ts`) and returns a JSON success or error message. It does not store or email messages yet: valid submissions are only logged to the server console. Connect an email service or database in `src/app/api/contact/route.ts` before going live.
+
 ## Getting started
 
 ```bash
@@ -23,5 +27,6 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run lint
+npm test
 npm run build
 ```

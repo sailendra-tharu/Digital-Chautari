@@ -21,7 +21,7 @@ export default function ServicesPage() {
     <main>
       <MediaHero
         eyebrow="Local roots × Digital growth"
-        title={<>Digital Chautari<br />Building Your Brand<br />for a <span className="text-gradient">Bigger Tomorrow</span></>}
+        title={<>Services that <span className="text-gradient">drive growth.</span></>}
         description="We help businesses, creators and communities turn ideas into impact with modern digital solutions — from strategy to software."
         actions={<Button href={CONSULTATION_HREF} icon={ArrowRight}>Book a Consultation</Button>}
         media={

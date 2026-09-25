@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Kicker } from "@/components/ui/Kicker";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Text } from "@/components/ui/Text";
 
 /** Left-aligned hero with a full-height visual (e.g. next/image with `fill`) that fades in from the right. */
@@ -25,8 +25,9 @@ export function MediaHero({
         {media}
         {overlay ? <div className="media-hero-overlay">{overlay}</div> : null}
       </div>
+      <div className="hero-glow" />
       <div className="container media-hero-content reveal">
-        <Kicker>{eyebrow}</Kicker>
+        <Eyebrow>{eyebrow}</Eyebrow>
         <Text variant="h1">{title}</Text>
         <Text variant="lede">{description}</Text>
         {actions ? <div className="hero-actions">{actions}</div> : null}

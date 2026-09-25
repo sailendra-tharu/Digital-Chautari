@@ -6,7 +6,6 @@ import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { DarkCta } from "@/components/sections/DarkCta";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { StatsBar } from "@/components/sections/StatsBar";
-import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
@@ -150,10 +149,7 @@ export default function Home() {
 
       <section className="section section-tight">
         <div className="container">
-          <div className="section-heading-row">
-            <SectionHeading eyebrow="From the chautari" title={<>Latest from <span className="text-gradient">our blog.</span></>} />
-            <ArrowLink href="#blog">View all articles</ArrowLink>
-          </div>
+          <SectionHeading eyebrow="From the chautari" title={<>Latest from <span className="text-gradient">our blog.</span></>} />
           <div className="blog-grid" id="blog">
             {blogPosts.map((post) => <BlogCard key={post.title} {...post} />)}
           </div>
