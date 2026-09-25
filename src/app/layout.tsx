@@ -4,6 +4,7 @@ import { ScrollReveal } from "@/components/layout/ScrollReveal";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,7 +19,7 @@ const sora = Sora({
   weight: ["600", "700", "800"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = getSiteUrl();
 const siteTitle = "Digital Chautari | Ideas → Impact";
 const siteDescription = "Digital marketing, content creation, and health-tech software from Kathmandu to the world.";
 
