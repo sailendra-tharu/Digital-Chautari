@@ -1,7 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import { Text } from "@/components/ui/Text";
-import type { Plan } from "@/components/services/servicesData";
+import type { Plan } from "@/data/services";
 
 export function PricingCard({ plan }: { plan: Plan }) {
   const tone = plan.featured ? "light" : "muted";

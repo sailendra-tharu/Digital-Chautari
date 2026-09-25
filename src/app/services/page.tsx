@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/sections/SectionHeading";
 import { HeroNote } from "@/components/services/HeroNote";
 import { IndustryTile } from "@/components/services/IndustryTile";
 import { ServiceCategoryCard } from "@/components/services/ServiceCategoryCard";
-import { industries, plans, serviceCategories } from "@/components/services/servicesData";
+import { industries, plans, serviceCategories } from "@/data/services";
 import { WhyWorkWithUs } from "@/components/services/WhyWorkWithUs";
 import { Button } from "@/components/ui/Button";
 
@@ -26,7 +26,7 @@ export default function ServicesPage() {
         actions={<Button href={CONSULTATION_HREF} icon={ArrowRight}>Book a Consultation</Button>}
         media={
           <Image
-            src="/images/services-chautari.jpg"
+            src="/assets/services-chautari.jpg"
             alt="A community gathered under a chautari tree at sunrise, discussing ideas around a laptop"
             fill
             priority

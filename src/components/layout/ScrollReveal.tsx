@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const REVEAL_GROUPS = [
   ".feature-grid", ".values-grid", ".product-grid", ".testimonial-grid", ".blog-grid", ".industries-grid",
   ".process-grid", ".teaser-grid", ".mission-grid",
-  ".quality-grid", ".team-grid", ".contact-info-grid", ".department-grid", ".tile-grid", ".roadmap",
+  ".quality-grid", ".team-grid", ".contact-info-grid", ".department-grid", ".tile-grid",
   ".service-category-list", ".plan-grid", ".industry-tile-grid",
 ].join(", ");
 

@@ -1,39 +1,52 @@
+import { z } from "zod";
+
 export const PROJECT_TYPES = ["Web Development", "Mobile App", "UI/UX Design", "Digital Marketing", "Content Creation", "Other"] as const;
 
 export const MESSAGE_MAX_LENGTH = 1000;
 
-export type ContactPayload = {
-  name: string;
-  email: string;
-  subject: string;
-  projectType: (typeof PROJECT_TYPES)[number];
-  message: string;
-};
+/** Single source of truth for contact form rules — used by the form (client) and /api/contact (server). */
+export const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your name.")
+    .max(100, "Name must be 100 characters or fewer."),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Please enter your email address.")
+    .max(200, "Email must be 200 characters or fewer.")
+    .pipe(z.email("Please enter a valid email address.")),
+  subject: z
+    .string()
+    .trim()
+    .min(3, "Please add a short subject.")
+    .max(150, "Subject must be 150 characters or fewer."),
+  projectType: z.enum(PROJECT_TYPES, { error: "Please choose a project type." }),
+  message: z
+    .string()
+    .trim()
+    .min(10, "Please tell us a little more (at least 10 characters).")
+    .max(MESSAGE_MAX_LENGTH, `Please keep your message under ${MESSAGE_MAX_LENGTH} characters.`),
+});
 
-export type ContactErrors = Partial<Record<keyof ContactPayload | "form", string>>;
+/** Raw form values (before trimming). */
+export type ContactInput = z.input<typeof contactSchema>;
+/** Validated, trimmed payload. */
+export type ContactPayload = z.output<typeof contactSchema>;
+export type ContactField = keyof ContactPayload;
+export type ContactErrors = Partial<Record<ContactField | "form", string>>;
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const CONTACT_FIELDS = Object.keys(contactSchema.shape) as ContactField[];
 
-export function validateContact(body: unknown): { data?: ContactPayload; errors?: ContactErrors } {
-  if (!body || typeof body !== "object") return { errors: { form: "Invalid request body." } };
-  const input = body as Record<string, unknown>;
-  const field = (key: string) => (typeof input[key] === "string" ? (input[key] as string).trim() : "");
-
-  const data = {
-    name: field("name"),
-    email: field("email"),
-    subject: field("subject"),
-    projectType: field("projectType"),
-    message: field("message"),
-  };
+/** First error message per field, e.g. { email: "Please enter a valid email address." }. */
+export function toContactErrors(error: z.ZodError): ContactErrors {
+  const { formErrors, fieldErrors } = z.flattenError(error);
   const errors: ContactErrors = {};
-
-  if (data.name.length < 2 || data.name.length > 100) errors.name = "Please enter your name.";
-  if (!EMAIL_PATTERN.test(data.email) || data.email.length > 200) errors.email = "Please enter a valid email address.";
-  if (data.subject.length < 3 || data.subject.length > 150) errors.subject = "Please add a short subject.";
-  if (!PROJECT_TYPES.includes(data.projectType as ContactPayload["projectType"])) errors.projectType = "Please choose a project type.";
-  if (data.message.length < 10) errors.message = "Please tell us a little more (at least 10 characters).";
-  else if (data.message.length > MESSAGE_MAX_LENGTH) errors.message = `Please keep your message under ${MESSAGE_MAX_LENGTH} characters.`;
-
-  return Object.keys(errors).length ? { errors } : { data: data as ContactPayload };
+  for (const field of CONTACT_FIELDS) {
+    const message = (fieldErrors as Partial<Record<ContactField, string[]>>)[field]?.[0];
+    if (message) errors[field] = message;
+  }
+  if (formErrors[0]) errors.form = formErrors[0];
+  return errors;
 }

@@ -1,7 +1,7 @@
 import { Clock } from "lucide-react";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import { responseTimes } from "./contactDetails";
+import { responseTimes } from "@/data/contact";
 
 export function ResponseTimeCard() {
   return (

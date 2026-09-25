@@ -1,7 +1,7 @@
 import { CircleCheck } from "lucide-react";
 import { Kicker } from "@/components/ui/Kicker";
 import { Text } from "@/components/ui/Text";
-import { reasons } from "./servicesData";
+import { reasons } from "@/data/services";
 
 export function WhyWorkWithUs() {
   return (

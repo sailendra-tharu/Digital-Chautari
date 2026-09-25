@@ -3,7 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import { divIcon } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { office } from "./contactDetails";
+import { office } from "@/data/contact";
 
 // Custom HTML marker: avoids Leaflet's default PNG icons, which break under bundlers.
 const pinIcon = divIcon({

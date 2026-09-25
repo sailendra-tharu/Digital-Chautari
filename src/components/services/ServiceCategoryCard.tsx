@@ -1,6 +1,6 @@
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import type { ServiceCategory } from "./servicesData";
+import type { ServiceCategory } from "@/data/services";
 
 export function ServiceCategoryCard({ category }: { category: ServiceCategory }) {
   return (

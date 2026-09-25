@@ -18,7 +18,7 @@ export default function ProductsPage() {
         description="Digital Chautari brings together creativity, content and care — building digital solutions that make a real difference."
         media={
           <Image
-            src="/images/products-hero.jpg"
+            src="/assets/products-hero.jpg"
             alt="Three friends sitting on a rocky ledge, watching sunrise over the Himalayas"
             fill
             priority

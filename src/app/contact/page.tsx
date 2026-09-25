@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactInfoCard } from "@/components/contact/ContactInfoCard";
-import { contactInfo, departments } from "@/components/contact/contactDetails";
+import { contactInfo, departments } from "@/data/contact";
 import { DepartmentCard } from "@/components/contact/DepartmentCard";
 import { FaqCallout } from "@/components/contact/FaqCallout";
 import { MapCard } from "@/components/contact/MapCard";
@@ -21,7 +21,7 @@ export default function ContactPage() {
         description="Have a project in mind, a question, or just want to say hi? We'd love to hear from you. Our team is here to help."
         media={
           <Image
-            src="/images/contact-kathmandu.jpg"
+            src="/assets/contact-kathmandu.jpg"
             alt="Kathmandu's pagoda temples beneath the snow-capped Himalayas"
             fill
             priority

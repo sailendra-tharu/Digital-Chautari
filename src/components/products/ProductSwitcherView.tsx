@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
 import { ProductMockup } from "./ProductMockup";
-import { products, type Product } from "./products";
+import { products, type Product } from "@/data/products";
 
 export function ProductSwitcherView({ initial = products[0].id }: { initial?: Product["id"] }) {
   const [active, setActive] = useState(initial);

@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import type { Accent } from "./servicesData";
+import type { Accent } from "@/data/services";
 
 export function IndustryTile({ icon, label, accent }: { icon: LucideIcon; label: string; accent: Accent }) {
   return (

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import type { Department } from "./contactDetails";
+import type { Department } from "@/data/contact";
 
 export function DepartmentCard({ department }: { department: Department }) {
   return (

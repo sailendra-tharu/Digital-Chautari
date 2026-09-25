@@ -1,6 +1,6 @@
 import { Ellipsis, Heart, House, ImageIcon, Leaf, Mail, MessageCircle, Send, Settings, TrendingUp } from "lucide-react";
 import { Text } from "@/components/ui/Text";
-import type { Product } from "./products";
+import type { Product } from "@/data/products";
 
 const sidebarIcons = [House, ImageIcon, Mail, Settings];
 

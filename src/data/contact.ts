@@ -3,7 +3,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export type Tone = "mint" | "teal" | "gold" | "lilac" | "pink";
+export type { Tone } from "./types";
+import type { Tone } from "./types";
 
 export const office = {
   name: "Digital Chautari",

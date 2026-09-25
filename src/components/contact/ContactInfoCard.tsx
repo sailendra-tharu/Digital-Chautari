@@ -1,6 +1,6 @@
 import { Icon } from "@/components/ui/Icon";
 import { Text } from "@/components/ui/Text";
-import type { ContactInfo } from "./contactDetails";
+import type { ContactInfo } from "@/data/contact";
 
 export function ContactInfoCard({ info }: { info: ContactInfo }) {
   return (

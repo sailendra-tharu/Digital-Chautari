@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { products } from "./products";
+import { products } from "@/data/products";
 import { ProductSwitcherView } from "./ProductSwitcherView";
 
 /** Reads ?venture= so "Learn more" links on Home open the matching tab. Wrap in <Suspense>. */

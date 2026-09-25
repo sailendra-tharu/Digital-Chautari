@@ -2,7 +2,7 @@
 
 import { ExternalLink, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
-import { officeMapsUrl } from "./contactDetails";
+import { officeMapsUrl } from "@/data/contact";
 
 // Leaflet touches `window`, so it only loads in the browser.
 const LeafletMap = dynamic(() => import("./LeafletMap"), {
