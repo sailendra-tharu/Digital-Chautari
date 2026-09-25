@@ -22,7 +22,7 @@ export const contactSchema = z.object({
     .trim()
     .min(3, "Please add a short subject.")
     .max(150, "Subject must be 150 characters or fewer."),
-  projectType: z.enum(PROJECT_TYPES, { error: "Please choose a project type." }),
+  projectType: z.enum(PROJECT_TYPES, { message: "Please choose a project type." }),
   message: z
     .string()
     .trim()
@@ -30,23 +30,5 @@ export const contactSchema = z.object({
     .max(MESSAGE_MAX_LENGTH, `Please keep your message under ${MESSAGE_MAX_LENGTH} characters.`),
 });
 
-/** Raw form values (before trimming). */
-export type ContactInput = z.input<typeof contactSchema>;
-/** Validated, trimmed payload. */
-export type ContactPayload = z.output<typeof contactSchema>;
-export type ContactField = keyof ContactPayload;
-export type ContactErrors = Partial<Record<ContactField | "form", string>>;
+export type ContactFormValue = z.infer<typeof contactSchema>;
 
-export const CONTACT_FIELDS = Object.keys(contactSchema.shape) as ContactField[];
-
-/** First error message per field, e.g. { email: "Please enter a valid email address." }. */
-export function toContactErrors(error: z.ZodError): ContactErrors {
-  const { formErrors, fieldErrors } = z.flattenError(error);
-  const errors: ContactErrors = {};
-  for (const field of CONTACT_FIELDS) {
-    const message = (fieldErrors as Partial<Record<ContactField, string[]>>)[field]?.[0];
-    if (message) errors[field] = message;
-  }
-  if (formErrors[0]) errors.form = formErrors[0];
-  return errors;
-}

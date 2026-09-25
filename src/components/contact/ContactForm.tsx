@@ -1,7 +1,7 @@
 "use client";
 
-import { Check, LoaderCircle, Send } from "lucide-react";
-import { useCallback } from "react";
+import { useEffect } from "react";
+import { Send } from "lucide-react";
 import { Controller } from "@/components/ui/form/Controller";
 import { PillRadioGroup } from "@/components/ui/form/PillRadioGroup";
 import { TextAreaField } from "@/components/ui/form/TextAreaField";
@@ -10,45 +10,63 @@ import { useFormController } from "@/components/ui/form/useFormController";
 import { Kicker } from "@/components/ui/Kicker";
 import { Text } from "@/components/ui/Text";
 import { Toast } from "@/components/ui/Toast";
-import { useContactSubmit } from "@/hooks/useContactSubmit";
-import { MESSAGE_MAX_LENGTH, PROJECT_TYPES, contactSchema, type ContactErrors, type ContactInput } from "@/lib/contact";
+import { getErrorMessage, useSendContact } from "@/hooks/useContactSubmit";
+import { MESSAGE_MAX_LENGTH, PROJECT_TYPES, contactSchema } from "@/lib/contact";
 
-const INITIAL_VALUES: ContactInput = { name: "", email: "", subject: "", projectType: PROJECT_TYPES[0], message: "" };
+const initialValues = {
+  name: "",
+  email: "",
+  subject: "",
+  projectType: PROJECT_TYPES[0],
+  message: "",
+} as const;
 
 export function ContactForm() {
-  const { control, handleSubmit, reset, setServerErrors } = useFormController(contactSchema, INITIAL_VALUES);
-  const handleSuccess = useCallback(() => {
-    reset();
-  }, [reset]);
+  const mutation = useSendContact();
+  const { control, handleSubmit, reset, setServerErrors } = useFormController(contactSchema, initialValues);
 
-  const handleError = useCallback((errors: ContactErrors) => {
-    setServerErrors(errors);
-  }, [setServerErrors]);
+  useEffect(() => {
+    if (mutation.isError) {
+      setServerErrors({ form: getErrorMessage(mutation.error) });
+    }
+  }, [mutation.error, mutation.isError, setServerErrors]);
 
-  const { send, status, notice, clearStatus } = useContactSubmit({
-    onSuccess: handleSuccess,
-    onError: handleError,
-  });
-
-  const clearStatusAndToast = clearStatus;
+  const toast = mutation.isSuccess
+    ? {
+        title: "Message sent",
+        variant: "success" as const,
+        message: mutation.data?.message || "Thanks! Your message has been sent successfully.",
+      }
+    : mutation.isError
+      ? {
+          title: "Unable to send",
+          variant: "error" as const,
+          message: getErrorMessage(mutation.error),
+        }
+      : null;
 
   return (
     <>
       <form
         className="contact-form"
-        onSubmit={handleSubmit(async (data) => {
-          await send(data);
-        }, clearStatusAndToast)}
-        // Any edit after a send clears the "Message sent" state.
-        onChange={() => {
-          if (status === "sent") clearStatusAndToast();
-        }}
         noValidate
+        onSubmit={handleSubmit(
+          async (data) => {
+            await mutation.mutateAsync(data);
+            reset();
+          },
+          () => undefined,
+        )}
       >
         <div className="contact-form-header">
           <Kicker>Get in touch</Kicker>
+
           <Text variant="h2">Send us a message</Text>
-          <Text variant="caption">Fill out the form below and we&apos;ll get back to you as soon as possible.</Text>
+
+          <Text variant="caption">
+            Fill out the form below and we&apos;ll get back to you as soon as
+            possible.
+          </Text>
         </div>
 
         <div className="form-grid">
@@ -56,14 +74,36 @@ export function ContactForm() {
             control={control}
             name="name"
             render={({ field, fieldState }) => (
-              <TextField {...field} label="Name" required autoComplete="name" placeholder="Your name" error={fieldState.error} />
+              <TextField
+                name={field.name}
+                label="Name"
+                value={field.value}
+                error={fieldState.error}
+                onValueChange={field.onValueChange}
+                onBlur={field.onBlur}
+                placeholder="Your name"
+                autoComplete="name"
+                required
+              />
             )}
           />
+
           <Controller
             control={control}
             name="email"
             render={({ field, fieldState }) => (
-              <TextField {...field} label="Email" type="email" required autoComplete="email" placeholder="you@company.com" error={fieldState.error} />
+              <TextField
+                name={field.name}
+                label="Email"
+                type="email"
+                value={field.value}
+                error={fieldState.error}
+                onValueChange={field.onValueChange}
+                onBlur={field.onBlur}
+                placeholder="you@company.com"
+                autoComplete="email"
+                required
+              />
             )}
           />
         </div>
@@ -72,7 +112,16 @@ export function ContactForm() {
           control={control}
           name="subject"
           render={({ field, fieldState }) => (
-            <TextField {...field} label="Subject" required placeholder="e.g. Project inquiry, Partnership, Support…" error={fieldState.error} />
+            <TextField
+              name={field.name}
+              label="Subject"
+              value={field.value}
+              error={fieldState.error}
+              onValueChange={field.onValueChange}
+              onBlur={field.onBlur}
+              placeholder="e.g. Project inquiry, Partnership, Support…"
+              required
+            />
           )}
         />
 
@@ -80,7 +129,16 @@ export function ContactForm() {
           control={control}
           name="projectType"
           render={({ field, fieldState }) => (
-            <PillRadioGroup {...field} label="Project Type" required options={PROJECT_TYPES} error={fieldState.error} />
+            <PillRadioGroup
+              name={field.name}
+              label="Project Type"
+              value={field.value}
+              options={PROJECT_TYPES}
+              error={fieldState.error}
+              required
+              onValueChange={field.onValueChange}
+              onBlur={field.onBlur}
+            />
           )}
         />
 
@@ -89,28 +147,39 @@ export function ContactForm() {
           name="message"
           render={({ field, fieldState }) => (
             <TextAreaField
-              {...field}
+              name={field.name}
               label="Message"
-              required
+              value={field.value}
+              error={fieldState.error}
+              onValueChange={field.onValueChange}
+              onBlur={field.onBlur}
               rows={5}
               maxLength={MESSAGE_MAX_LENGTH}
               placeholder="Tell us about your project, goals, and any other details…"
-              error={fieldState.error}
+              required
             />
           )}
         />
 
-        <button className="button button-primary button-block" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? <LoaderCircle className="spin" size={16} aria-hidden="true" />
-            : status === "sent" ? <Check size={16} aria-hidden="true" />
-            : <Send size={16} aria-hidden="true" />}
-          {status === "sending" ? "Sending…" : status === "sent" ? "Message sent" : "Send Message"}
+        <button
+          className="button button-primary button-block"
+          type="submit"
+          disabled={mutation.isPending}
+        >
+          <Send size={16} aria-hidden="true" />
+          {mutation.isPending ? "Sending..." : "Send Message"}
         </button>
-        <Text as="span" variant="caption" className={`form-notice ${status === "error" ? "is-error" : ""}`} role="status" aria-live="polite">
-          {status === "error" ? notice : ""}
-        </Text>
       </form>
-      <Toast message={notice} open={status === "sent"} onClose={clearStatus} />
+
+      {toast ? (
+        <Toast
+          message={toast.message}
+          open={true}
+          title={toast.title}
+          variant={toast.variant}
+          onClose={() => mutation.reset()}
+        />
+      ) : null}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import "./globals.css";
@@ -63,10 +64,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: revealBootstrap }} />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <ScrollReveal />
+        <QueryProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <ScrollReveal />
+        </QueryProvider>
       </body>
     </html>
   );
