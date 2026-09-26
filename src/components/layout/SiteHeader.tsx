@@ -45,6 +45,14 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+        <button
+          className={"nav-backdrop " + (open ? "is-open" : "")}
+          type="button"
+          aria-label="Close navigation"
+          aria-hidden={!open}
+          tabIndex={open ? 0 : -1}
+          onClick={() => setOpen(false)}
+        />
         <Link href="/contact" className="button button-small button-primary nav-cta">
           Contact Us <ArrowUpRight size={16} aria-hidden="true" />
         </Link>
