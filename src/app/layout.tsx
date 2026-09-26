@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -50,6 +50,11 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 const revealBootstrap = `document.documentElement.classList.add("reveal-ready")`;
